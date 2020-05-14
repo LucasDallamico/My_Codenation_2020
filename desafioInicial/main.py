@@ -3,13 +3,11 @@ def descriptador(num_casa,str_crip):
     # transformei em lista para facilitar o trabalho com caracteres separados
     texto = list(str_crip)
     c = 1
-    aux = ''
-    #texto[2] = chr(ord(texto[2]) + 1)
     for i in range(0,len(texto)):
         c = ord(texto[i])
-        if (( c >= 65 and c <= 90 ) or ( c >=97 and c <= 122)):
+        if ( c >= 65 and c <= 90 ) or ( c >=97 and c <= 122):
             c = c - num_casa
-            if ( (c < 65 and (c+num_casa) <= 90 )or (c < 97 and  (c + num_casa) <= 122 )):
+            if (c < 65 and (c+num_casa) <= 90 ) or (c < 97 and  (c + num_casa) <= 122 ):
                 c = c + 26
         texto[i] = chr(c)
     
@@ -29,10 +27,11 @@ import pickle
 from hashlib import sha1
 
 # -------------------------------------
-
 # Urls de interação
-url_request = "https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=b684822732ff0a2ae7cf214e4c1babe4a00386a8"
-url_send = "https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=b684822732ff0a2ae7cf214e4c1babe4a00386a8"
+url_request = ("https://api.codenation.dev/v1/challenge/dev-ps/generate-data?"
+                "token=b684822732ff0a2ae7cf214e4c1babe4a00386a8")
+url_send = ("https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?"
+            "token=b684822732ff0a2ae7cf214e4c1babe4a00386a8")
 
 #obter a estrutura json do servidor
 bruto_json = requests.get(url_request)
@@ -51,13 +50,10 @@ msn_decodifica = descriptador(num_c,mns_codificada)
 msn_resumo_dec = resumo_descriptador(msn_decodifica)
 dic_dados["decifrado"] = msn_decodifica
 dic_dados["resumo_criptografico"] = msn_resumo_dec
-#print(dic_dados)
 
 #transformar o dicionário em json e escrever no arquivo
 with open("answer.json", "w") as arq:
     json.dump(dic_dados,arq,indent=4,sort_keys=False)
-
-#arq.close()
 
 #Envia para o arquivo para o servidor
 files = {
