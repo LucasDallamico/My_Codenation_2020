@@ -1,0 +1,8 @@
+Metodos especiias das classes em python
+
+@property -> Função com trata com variavel
+@classmethd -> equivalente ao extend em c++
+    e com paramentro cls em vez de self.
+    para envocar outra função dentro
+    cls.funcao -> a função tem que ter 
+    especificado @staticmelhod
