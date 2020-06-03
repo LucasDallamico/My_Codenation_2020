@@ -1,0 +1,9 @@
+Exemplo de teste usando o pytest
+
+import pytest
+
+@pytest.mask.parametrize('ano', [1600,1720])
+def test_deve_ser_bissexto(ano):
+    resp = eh_bissexto(ano)
+    assert resp is True
+    
